@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "codereviewbot"
+version = "0.1.0"
+description = "Rule-based PR review helper that flags TODOs, hardcoded secrets, long functions, missing error handling and debug leftovers in unified diffs."
+requires-python = ">=3.10"
+dependencies = []
+
+[project.scripts]
+codereviewbot = "codereviewbot.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
