@@ -81,11 +81,10 @@ def parse_diff(text: str) -> list[AddedLine]:
     for raw in text.splitlines():
         if raw.startswith("+++ "):
             path = raw[4:].strip()
-            if path.startswith("b/"):
-                path = path[2:]
+            path = path.removeprefix("b/")
             current_file = path
             continue
-        if raw.startswith("--- ") or raw.startswith("diff ") or raw.startswith("index "):
+        if raw.startswith(("--- ", "diff ", "index ")):
             continue
         match = hunk_header.match(raw)
         if match:
@@ -243,11 +242,10 @@ def render_markdown(findings: list[Finding]) -> str:
     out.append("## Summary (template, no LLM call)")
     out.append("")
     if findings:
-        riskiest = sorted(
+        riskiest = max(
             {f.file for f in findings},
             key=lambda name: sum(1 for f in findings if f.file == name),
-            reverse=True,
-        )[0]
+        )
         kinds = ", ".join(sorted({f.kind for f in findings}))
         out.append(
             f"This diff adds {len(findings)} flagged item(s) across "

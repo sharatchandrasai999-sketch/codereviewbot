@@ -4,4 +4,4 @@ __version__ = "0.1.0"
 
 from .review import Finding, render_markdown, review_diff, review_file, verdict
 
-__all__ = ["Finding", "render_markdown", "review_diff", "review_file", "verdict", "__version__"]
+__all__ = ["Finding", "__version__", "render_markdown", "review_diff", "review_file", "verdict"]
