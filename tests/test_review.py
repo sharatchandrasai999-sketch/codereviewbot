@@ -2,8 +2,6 @@
 
 from pathlib import Path
 
-import pytest
-
 from codereviewbot.cli import main
 from codereviewbot.review import render_markdown, review_diff, verdict
 
